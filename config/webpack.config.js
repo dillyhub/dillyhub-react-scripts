@@ -17,7 +17,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 const InlineChunkHtmlPlugin = require('react-dev-utils/InlineChunkHtmlPlugin');
 const TerserPlugin = require('terser-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const safePostCssParser = require('postcss-safe-parser');
 const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
@@ -109,15 +108,7 @@ module.exports = function (webpackEnv) {
   // common function to get style loaders
   const getStyleLoaders = (cssOptions, preProcessor) => {
     const loaders = [
-      isEnvDevelopment && require.resolve('style-loader'),
-      isEnvProduction && {
-        loader: MiniCssExtractPlugin.loader,
-        // css is located in `static/css`, use '../../' to locate index.html folder
-        // in production `paths.publicUrlOrPath` can be a relative path
-        options: paths.publicUrlOrPath.startsWith('.')
-          ? { publicPath: '../../' }
-          : {},
-      },
+      require.resolve('style-loader'),
       {
         loader: require.resolve('css-loader'),
         options: cssOptions,
@@ -682,13 +673,6 @@ module.exports = function (webpackEnv) {
       // See https://github.com/facebook/create-react-app/issues/186
       isEnvDevelopment &&
         new WatchMissingNodeModulesPlugin(paths.appNodeModules),
-      isEnvProduction &&
-        new MiniCssExtractPlugin({
-          // Options similar to the same options in webpackOptions.output
-          // both options are optional
-          filename: 'static/css/[name].[contenthash:8].css',
-          chunkFilename: 'static/css/[name].[contenthash:8].chunk.css',
-        }),
       // Generate an asset manifest file with the following content:
       // - "files" key: Mapping of all asset filenames to their corresponding
       //   output file so that tools can pick it up without having to parse
