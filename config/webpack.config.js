@@ -121,6 +121,7 @@ module.exports = function (webpackEnv) {
         options: {
           postcssOptions: {
             plugins: [
+              require('tailwindcss'),
               require('postcss-flexbugs-fixes'),
               [
                 require('postcss-preset-env'),
