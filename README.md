@@ -3,6 +3,7 @@
 fork from https://github.com/facebook/create-react-app.
 - Postcss version change
 - Disable mini-css-extract-plugin
+- Add tailwindcss 2.1
 
 This package includes scripts and configuration used by [Create React App](https://github.com/facebook/create-react-app).<br>
 Please refer to its documentation:
