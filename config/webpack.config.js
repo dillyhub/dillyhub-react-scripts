@@ -573,6 +573,8 @@ module.exports = function (webpackEnv) {
                     compileType: 'module',
                     getLocalIdent: getCSSModuleLocalIdent,
                   },
+                  data: '@import "styles/data.scss";',
+                  includePaths:[__dirname, 'src']
                 },
                 'sass-loader'
               ),
