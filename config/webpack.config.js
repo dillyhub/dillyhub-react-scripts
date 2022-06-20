@@ -573,11 +573,14 @@ module.exports = function (webpackEnv) {
                     compileType: 'module',
                     getLocalIdent: getCSSModuleLocalIdent,
                   },
-                  data: '@import "styles/data.scss";',
-                  includePaths:[__dirname, 'src']
                 },
                 'sass-loader'
-              ),
+              ).concat({
+                loader: require.resolve('sass-loader'),
+                options: {
+                  includePaths: [__dirname, 'src'],
+                  data: `@import 'styles/utils.scss';`}
+              }),
             },
             // "file" loader makes sure those assets get served by WebpackDevServer.
             // When you `import` an asset, you get its (virtual) filename.
